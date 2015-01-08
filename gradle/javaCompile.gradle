@@ -1,0 +1,6 @@
+tasks.withType(JavaCompile) {
+  options.encoding = 'utf-8'
+  options.compilerArgs = ['-Xlint:-options']
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+}

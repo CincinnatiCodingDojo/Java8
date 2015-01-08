@@ -1,0 +1,12 @@
+tasks.withType(Jar) {
+  if (name != 'jar') return
+  classifier = project.release
+  manifest {
+    attributes(
+        'Implementation-Version': "${project.version}-${project.release}",
+        'Implementation-Title': project.name,
+        'Specification-Version': project.version,
+        'Specification-Title':project. name
+    )
+  }
+}

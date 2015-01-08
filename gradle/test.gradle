@@ -1,0 +1,24 @@
+tasks.withType(Test) {
+  afterTest { desc, result ->
+    if (result.exceptions.size() > 0) {
+      println """
+======================================
+>>>>>>>>>  An Exception was thrown having Name of: ${desc.name}
+  Details: ${result.exceptions}
+======================================
+"""
+    }
+  }
+
+  beforeSuite { suite ->
+    if (suite.name.contains("Gradle Worker ")) return
+    if (suite.name.equals("Test Run")) return
+    println "Running test: ${suite.name}"
+  }
+  afterSuite { suite, result ->
+    if (suite.name.contains("Gradle Worker ")) return
+    def sums = "Total (${result.testCount}) | Successful (${result.successfulTestCount}) | Failed (${result.failedTestCount}) | Skipped (${result.skippedTestCount})"
+    if (suite.name == "Test Run") println "Summary: ${sums}"
+    else println "\t${sums}"
+  }
+}
